@@ -26,13 +26,11 @@ const Articles = () => {
         <>
           <h2 className='articles-title'>All Articles</h2>
           <div className="articles-container">
-            <p>Test: Entered Articles.jsx return statement</p>
           {articles.map((article, index) => (
             <>
-            <p>Test: each article should appear here</p>
            <Article key={article} article={article}/>
-        //index and articles are being passed to props of the Article component
-        //key is needed here to give each article card a unique key
+        {/* index and articles are being passed to props of the Article component
+        key is needed here to give each article card a unique key */}
         </>
           ))}
           </div>
