@@ -10,12 +10,28 @@ export const fetchAllArticles = () => {
 };
 
 export const fetchTopics = () => {
-  return (
-    axios
-      .get(`https://akram-nc-news.onrender.com/api/topics`)
-      //   .get(`../backend/be-nc-news/db/data/development-data/topics.js`)
-      .then((response) => {
-        return response.data.topics;
-      })
-  );
+  return axios
+    .get(`https://akram-nc-news.onrender.com/api/topics`)
+    .then((response) => {
+      return response.data.topics;
+    });
+};
+
+export const fetchArticleByTopic = (topic) => {
+  return axios
+    .get(`https://akram-nc-news.onrender.com/api/articles/?topic=${topic}`)
+    .then((response) => {
+      return response.data.articles;
+    });
+};
+
+export const fetchArticleById = (article_id) => {
+  return axios
+    .get(
+      `https://akram-nc-news.onrender.com/api/articles/?article_id=${article_id}`
+    )
+    .then((response) => {
+      console.log("Single Article Data", response.data);
+      return response.data.articles[article_id];
+    });
 };

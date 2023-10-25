@@ -1,6 +1,6 @@
 import { fetchAllArticles } from "../../utils/api";
 import { useState, useEffect } from "react";
-import Article from "./Article";
+import ArticleCard from "./ArticleCard";
 const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -10,11 +10,13 @@ const Articles = () => {
   useEffect(() => {
     fetchAllArticles()
       .then((articles) => {
+        console.log('articles', articles)
         setIsLoading(false);
         setArticles(articles);
       })
       .catch((error) => {
         console.error("Error fetching articles:", error);
+        setIsLoading(false);
       });
   }, []);
 
@@ -28,7 +30,7 @@ const Articles = () => {
           <div className="articles-container">
           {articles.map((article, index) => (
             <>
-           <Article key={article} article={article}/>
+           <ArticleCard key={article.article_id} article={article}/>
         {/* index and articles are being passed to props of the Article component
         key is needed here to give each article card a unique key */}
         </>
