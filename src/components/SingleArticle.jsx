@@ -1,11 +1,13 @@
-import { fetchArticleById } from "../../utils/api";
+import { fetchArticleById, getCommentsByArticleId } from "../../utils/api";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 const SingleArticle = () => {
     const {article_id} = useParams()
   const [article, setArticle] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [comments, setComments] = useState([]);
+  const [showComments, setShowComments] = useState(false);
+
   //isLoading makes the code wait for the articles to load
 
 
@@ -23,9 +25,41 @@ const SingleArticle = () => {
       });
   }, [article_id]);
 
+//GETcOOMMNETS BY ARTICLE ID NEEDS TO BE IN A USE EFFECT, ALONG WITH THE THEN AND CATCH BLOCKS
+    const handleOpenComments = () => {
+        getCommentsByArticleId(article_id)
+    .then((comments) => {
+        console.log('comments are here: ',comments)
+        setComments(comments)
+        setShowComments(true)
+    })
+    .catch((error) => {
+        console.error("Error fetching comments:", error);
+        setIsLoading(false);
+
+      });
+  }
+
+
   if (isLoading) {
     return <p>loading...</p>;
   }
+  const trueFunction = (comments) => {
+    console.log(comments, 'entered true function')
+    setShowComments(true)
+    if (comments.comments.length!==0) {
+       comments.comments.map((comment)=> {
+        comment.body
+       })
+    }
+        return (
+
+    <>
+    comments pressed
+    </>)
+
+    
+    }
   
     return (
         <>
@@ -34,11 +68,39 @@ const SingleArticle = () => {
             <p>{article.author}</p>
             <img className='article-image' src={article.article_img_url} alt="" />
 
-        {/* index and articles are being passed to props of the Article component
-        key is needed here to give each article card a unique key */}
+        <button onClick={handleOpenComments()}>Open Comments</button>
+        {showComments ?
+
+trueFunction(comments) : <p>do nothing</p>
+
+        }
+        {/* {showComments? (
+        (  <div className="comments">
+            <h3>Comments:</h3> */}
+            {/* <h3>{comments}</h3> */}
+            {/* {if (comments.length !==0) {
+                comments.comments.map((comment) => {
+                    <div key={comment.comment_id}>
+                        {comment.body}
+                    </div> */}
+                 {/* })
+         }}))} */}
+
+            {
+            // if (comments.length!==0) {
+            // comments.map((comment) => (
+            //   <>
+            //     <div key={comment.comment_id}>
+            //     <p>{comment.body}</p> 
+            //   </div>
+            //   </>
+            //   ))}
+            }
+        
           </div>
+
         </>
       );
-    };
+        }
 
 export default SingleArticle

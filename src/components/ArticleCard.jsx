@@ -7,6 +7,7 @@ const ArticleCard = ( props ) => {
         <h3>Article:</h3>
         <Link to={`/article/${props.article.article_id}`}>
         <p>{props.article.title}</p>
+        <img className='article-card-image' src={props.article.article_img_url} alt="" />
         </Link>
         <p>Topic - {props.article.topic}</p>
     </div>
