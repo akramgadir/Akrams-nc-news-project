@@ -26,7 +26,8 @@ const SingleArticle = () => {
   }, [article_id]);
 
 //GETcOOMMNETS BY ARTICLE ID NEEDS TO BE IN A USE EFFECT, ALONG WITH THE THEN AND CATCH BLOCKS
-    const handleOpenComments = () => {
+    
+const handleOpenComments = () => {
         getCommentsByArticleId(article_id)
     .then((comments) => {
         console.log('comments are here: ',comments)
@@ -44,22 +45,42 @@ const SingleArticle = () => {
   if (isLoading) {
     return <p>loading...</p>;
   }
-  const trueFunction = (comments) => {
-    console.log(comments, 'entered true function')
-    setShowComments(true)
-    if (comments.comments.length!==0) {
-       comments.comments.map((comment)=> {
-        comment.body
-       })
-    }
-        return (
+  // const renderComments = (comments) => {
+  //   console.log(comments, 'entered true function')
+  //   setShowComments(true)
+  //   if (comments.comments.length!==0) {
+  //      comments.comments.map((comment)=> {
+  //       comment.body
+  //      })
+  //   }
+  //       return (
 
-    <>
-    comments pressed
-    </>)
+  //   <>
+  //   comments pressed
+  //   </>)
 
     
+  //   }
+
+  const renderComments = () => {
+    if (showComments) {
+      if (comments.length !== 0) {
+        return (
+          <div className="comments">
+            <h3>Comments:</h3>
+            {comments.comments.map((comment) => (
+              <div key={comment.comment_id}>
+                <p>{comment.body}</p>
+              </div>
+            ))}
+          </div>
+        );
+      } else {
+        return <p>No comments available.</p>;
+      }
     }
+    return null; // Return null if showComments is false
+  };
   
     return (
         <>
@@ -68,39 +89,24 @@ const SingleArticle = () => {
             <p>{article.author}</p>
             <img className='article-image' src={article.article_img_url} alt="" />
 
-        <button onClick={handleOpenComments()}>Open Comments</button>
-        {showComments ?
-
-trueFunction(comments) : <p>do nothing</p>
-
-        }
-        {/* {showComments? (
-        (  <div className="comments">
-            <h3>Comments:</h3> */}
-            {/* <h3>{comments}</h3> */}
-            {/* {if (comments.length !==0) {
-                comments.comments.map((comment) => {
-                    <div key={comment.comment_id}>
-                        {comment.body}
-                    </div> */}
-                 {/* })
-         }}))} */}
-
-            {
-            // if (comments.length!==0) {
-            // comments.map((comment) => (
-            //   <>
-            //     <div key={comment.comment_id}>
-            //     <p>{comment.body}</p> 
-            //   </div>
-            //   </>
-            //   ))}
-            }
-        
+        <button className="open-comments-button" onClick={handleOpenComments}>Open Comments</button>
+        {showComments && (
+          <div className="comments">
+            <h3>Comments:</h3>
+            {comments.length !== 0 ? (
+              comments.comments.map((comment) => (
+                <div key={comment.comment_id}>
+                  <p>{comment.body}</p>
+                </div>
+              ))
+            ) : (
+              <p>No comments available.</p>
+            )}
           </div>
+        )}
+      </div>
+    </>
+  );
+};
 
-        </>
-      );
-        }
-
-export default SingleArticle
+export default SingleArticle;
