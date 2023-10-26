@@ -23,7 +23,7 @@ button:hover {
   filter: drop-shadow(0 0 1em #646cffaa);
 }
 
-.open-comments-button {
+.show-comments-button {
   color: #1c3377;
   background-color: rgb(184, 186, 235);
 }

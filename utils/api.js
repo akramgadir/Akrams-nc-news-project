@@ -31,7 +31,6 @@ export const fetchArticleById = (article_id) => {
       `https://akram-nc-news.onrender.com/api/articles/?article_id=${article_id}`
     )
     .then((response) => {
-      console.log("Single Article ARTICLE ID Data", response.data);
       return response.data.articles[article_id];
     });
 };
@@ -43,8 +42,6 @@ export const getCommentsByArticleId = (article_id) => {
       `https://akram-nc-news.onrender.com/api/articles/${article_id}/comments`
     )
     .then((response) => {
-      console.log("Single Article COMMENTS Data", response.data);
       return response.data;
-      // return response.data.articles[article_id];
     });
 };

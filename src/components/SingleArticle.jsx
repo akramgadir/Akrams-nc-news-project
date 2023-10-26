@@ -30,9 +30,13 @@ const SingleArticle = () => {
 const handleOpenComments = () => {
         getCommentsByArticleId(article_id)
     .then((comments) => {
-        console.log('comments are here: ',comments)
+        // console.log('comments are here: ',comments)
+        if (showComments===false) {
         setComments(comments)
-        setShowComments(true)
+        setShowComments(true)}
+        if (showComments===true) {
+          setShowComments(false)
+        }
     })
     .catch((error) => {
         console.error("Error fetching comments:", error);
@@ -45,42 +49,7 @@ const handleOpenComments = () => {
   if (isLoading) {
     return <p>loading...</p>;
   }
-  // const renderComments = (comments) => {
-  //   console.log(comments, 'entered true function')
-  //   setShowComments(true)
-  //   if (comments.comments.length!==0) {
-  //      comments.comments.map((comment)=> {
-  //       comment.body
-  //      })
-  //   }
-  //       return (
-
-  //   <>
-  //   comments pressed
-  //   </>)
-
-    
-  //   }
-
-  const renderComments = () => {
-    if (showComments) {
-      if (comments.length !== 0) {
-        return (
-          <div className="comments">
-            <h3>Comments:</h3>
-            {comments.comments.map((comment) => (
-              <div key={comment.comment_id}>
-                <p>{comment.body}</p>
-              </div>
-            ))}
-          </div>
-        );
-      } else {
-        return <p>No comments available.</p>;
-      }
-    }
-    return null; // Return null if showComments is false
-  };
+ 
   
     return (
         <>
@@ -89,7 +58,7 @@ const handleOpenComments = () => {
             <p>{article.author}</p>
             <img className='article-image' src={article.article_img_url} alt="" />
 
-        <button className="open-comments-button" onClick={handleOpenComments}>Open Comments</button>
+        <button className="show-comments-button" onClick={handleOpenComments}>Show Comments</button>
         {showComments && (
           <div className="comments">
             <h3>Comments:</h3>
