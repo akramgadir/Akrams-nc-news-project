@@ -28,6 +28,7 @@ button:hover {
   background-color: rgb(184, 186, 235);
 }
 .header {
+  /* z-index: 0; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,6 +124,18 @@ nav li:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  margin-top: 0rem;
+  padding: 1rem;
+}
+
+h2.articles-title {
+  z-index: 1;
+  color: #3c4fad;
+  background-color: rgb(147, 164, 233);
+  padding: 1rem;
+  position: relative;
+  margin-bottom: 1rem;
 }
 
 .logo {

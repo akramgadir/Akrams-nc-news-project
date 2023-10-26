@@ -45,3 +45,17 @@ export const getCommentsByArticleId = (article_id) => {
       return response.data;
     });
 };
+
+export const updateVotes = (article_id, newVoteCount) => {
+  return axios
+    .patch(`https://akram-nc-news.onrender.com/api/articles/${article_id}`, {
+      inc_votes: newVoteCount, //sending the new vote count
+    })
+    .then((response) => {
+      console.log(
+        "api for updateVotes response data",
+        response.data.articles.votes
+      );
+      return response.data.articles.votes;
+    });
+};

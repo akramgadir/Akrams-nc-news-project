@@ -1,4 +1,4 @@
-import { fetchArticleById, getCommentsByArticleId } from "../../utils/api";
+import { fetchArticleById, getCommentsByArticleId, updateVotes } from "../../utils/api";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 const SingleArticle = () => {
@@ -7,9 +7,9 @@ const SingleArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
+  const [votes, setVotes] = useState(article.votes);//NOT SURE WHAT TO SET THIS TO INITIALLY
 
   //isLoading makes the code wait for the articles to load
-
 
   useEffect(() => {
     fetchArticleById(article_id)
@@ -17,6 +17,7 @@ const SingleArticle = () => {
         console.log('single article', article)
         setIsLoading(false);
         setArticle(article);
+        setVotes(article.votes)
       })
       .catch((error) => {
         console.error("Error fetching article:", error);
@@ -44,6 +45,22 @@ const handleOpenComments = () => {
 
       });
   }
+  const handleVotes = () => {
+      // optimistically incrementing the votes in the state
+  setVotes(votes + 1);
+updateVotes((article_id, votes + 1) )
+    .then((votes)=>{
+      console.log('handleVotes votes: ', votes)
+setVotes(votes)
+    })
+    .catch((error) => {
+        console.error("Error fetching comments:", error);
+        setIsLoading(false);
+
+      });
+  }
+
+
 
 
   if (isLoading) {
@@ -57,8 +74,10 @@ const handleOpenComments = () => {
           <div className="single-article">
             <p>{article.author}</p>
             <img className='article-image' src={article.article_img_url} alt="" />
-
-        <button className="show-comments-button" onClick={handleOpenComments}>Show Comments</button>
+            <p>Votes: {votes}</p>
+            <button className="votes-button" onClick={handleVotes}>Vote</button>
+        <button className="show-comments-button" onClick={handleOpenComments}>{showComments ? <>Hide Comments</> : <>Show Comments</>}
+</button>
         {showComments && (
           <div className="comments">
             <h3>Comments:</h3>
