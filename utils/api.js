@@ -59,3 +59,24 @@ export const updateVotes = (article_id, newVoteCount) => {
       return response.data.articles.votes;
     });
 };
+
+export const voteUpArticleById = (article_id) => {
+  return axios
+    .patch(`https://akram-nc-news.onrender.com/api/articles/${article_id}`, {
+      inc_votes: 1,
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
+export const voteDownArticleById = (article_id) => {
+  return axios
+    .patch(`https://akram-nc-news.onrender.com/api/articles/${article_id}`, {
+      inc_votes: -1,
+    })
+    .then((response) => {
+      //   console.log(response, "res in api, vote down");
+      return response.data;
+    });
+};
