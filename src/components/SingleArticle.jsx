@@ -1,4 +1,4 @@
-import { fetchArticleById, getCommentsByArticleId, updateVotes, voteDownArticleById, voteUpArticleById} from "../../utils/api";
+import { fetchArticleById, getCommentsByArticleId, updateVotes } from "../../utils/api";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 const SingleArticle = () => {
@@ -7,62 +7,24 @@ const SingleArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
-  const [votes, setVotes] = useState(0);
-  const [voteUpDisabled, setVoteUpDisabled] = useState(false);
-  const [voteDownDisabled, setVoteDownDisabled] = useState(false);
+  const [votes, setVotes] = useState(article.votes);
 
   //isLoading makes the code wait for the articles to load
 
   useEffect(() => {
     fetchArticleById(article_id)
       .then((article) => {
-        console.log('single article', article.votes)
+        console.log('single article', article)
+        setIsLoading(false);
         setArticle(article);
         setVotes(article.votes)
-        setIsLoading(false);
-   })
+      })
       .catch((error) => {
         console.error("Error fetching article:", error);
         setIsLoading(false);
 
       });
   }, [article_id]);
-
-  const incVote = () => {
-    if (!voteDownDisabled) {
-      setVotes(votes + 1);
-      voteUpArticleById(article_id);
-      setVoteUpDisabled(true);
-      setVoteDownDisabled(false);
-      console.log('incVote: ', votes)
-    } else {
-      setVotes(votes + 2);
-      voteUpArticleById(article_id);
-      voteUpArticleById(article_id);
-      setVoteUpDisabled(true);
-      setVoteDownDisabled(false);
-      console.log('incVote else: ', votes)
-    }
-  };
-
-  const decVote = () => {
-    if (!voteUpDisabled) {
-      setVotes(votes - 1);
-      voteDownArticleById(article_id);
-      setVoteUpDisabled(false);
-      setVoteDownDisabled(true);
-      console.log('decVote: ', votes)
-
-    } else {
-      setVotes(votes - 2);
-      voteDownArticleById(article_id);
-      voteDownArticleById(article_id);
-      setVoteUpDisabled(false);
-      setVoteDownDisabled(true);
-      console.log('decVote else: ', votes)
-
-    }
-  };
 
 //GETcOOMMNETS BY ARTICLE ID NEEDS TO BE IN A USE EFFECT, ALONG WITH THE THEN AND CATCH BLOCKS
     
@@ -105,6 +67,7 @@ setVotes(votes)
     return <p>loading...</p>;
   }
  
+  
     return (
         <>
           <h2 className='articles-title'>Article - {article.title}</h2>
@@ -114,13 +77,7 @@ setVotes(votes)
             <p>Votes: {votes}</p>
             <button className="votes-button" onClick={handleVotes}>Vote</button>
         <button className="show-comments-button" onClick={handleOpenComments}>{showComments ? <>Hide Comments</> : <>Show Comments</>}
-</button> 
-          <button onClick={incVote} disabled={voteUpDisabled}>
-            vote up
-          </button>
-          <button onClick={decVote} disabled={voteDownDisabled}>
-            vote down
-          </button>
+</button>
         {showComments && (
           <div className="comments">
             <h3>Comments:</h3>

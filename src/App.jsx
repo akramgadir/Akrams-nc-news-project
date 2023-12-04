@@ -16,6 +16,7 @@ function App() {
     <>
     <Header/>
     <NavBar/>
+    <div id="content">
     <Routes>
       <Route path="/Home" element = {<Home />} /> 
       <Route path="/Articles" element = {<Articles />} /> 
@@ -23,9 +24,10 @@ function App() {
       <Route path="/Article/:article_id" element = {<SingleArticle />} />  
       <Route path="/Topics" element = {<Topics />} /> 
       <Route path="/Topics/:topic" element = {<Topic />} /> 
-      <Route path="/Footer" element = {<Footer />} /> 
+      {/* <Route path="/Footer" element = {<Footer />} />  */}
     </Routes>
-    <Footer/>
+    </div>
+    {/* <Footer/> */}
 
     </>
   )
