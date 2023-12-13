@@ -1,38 +1,40 @@
-import { Link} from "react-router-dom"
-import { fetchTopics } from "../../utils/api"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import './Topics.css';
+import { fetchTopics } from '../../utils/api';
 
 const Topics = () => {
-const [topics, setTopics] = useState([])
-const [isLoading, setIsLoading] = useState(true)
+    const [topics, setTopics] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-useEffect(() => {
-setIsLoading(true);
-fetchTopics()
-    .then((topics)=> {
-        setIsLoading(false) //this is a good place to console log to make sure you're getting the topics out correctly
-        setTopics(topics)
-    }).catch((error) => {
-    console.error("Error fetching articles:", error);
-  });
-}, [])
+    useEffect(() => {
+        setIsLoading(true);
+        fetchTopics()
+            .then((topicsFromAPI) => {
+                setIsLoading(false);
+                setTopics(topicsFromAPI);
+            })
+            .catch((error) => {
+                console.error("Error fetching topics:", error);
+            });
+    }, []);
 
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
 
-  if (isLoading) {
-    return <p>loading...</p>;
-  }
-return (
-  <>
-  <h2>Topics:</h2>
-  <p>{topics.topics}</p>
-<ul>
-{ topics.map((topic) => {
-   return <Link to={`/Topics/${topic.slug}`} key={topic.slug}>
-      <li>{topic.slug}</li></Link>
-
-})}</ul> 
-
-</>
-)
+    return (
+        <div className="topics-container">
+            <h2>Explore Topics</h2>
+            <ul className="topics-list">
+                {topics.map((topic) => (
+                    <li key={topic.slug}>
+                        <Link to={`/Topics/${topic.slug}`}>{topic.slug}</Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
-export default Topics
+
+export default Topics;

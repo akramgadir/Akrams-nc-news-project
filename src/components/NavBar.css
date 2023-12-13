@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  background-color: #060c2a;
+  color: #fff;
+  position: fixed; /* Make navbar fixed */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Stretch across the full viewport width */
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #6183e9;
+  padding: 0.5rem;
+  transition: color 0.3s;
+}
+
+.nav-item:hover {
+  color: #cdcdcd;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+  }
+}

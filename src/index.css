@@ -11,6 +11,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  padding-top: 70px; /* Adjust as per the navbar's height */
 }
 
 a {
@@ -44,4 +46,19 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.loading-bar {
+  height: 5px;
+  background-color: #646cff;
+  animation: loading 3s linear infinite;
 }

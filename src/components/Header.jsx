@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom"
+import React from 'react';
+import './Header.css';
 
 const Header = () => {
     return (
-        <h1 className = 'header'>Akram's NC News Project</h1>
-    )
+        <header className='header-title'>Akram's NC News Project</header>
+    );
 }
 
-export default Header
+export default Header;

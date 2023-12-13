@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom"
+import React from 'react';
+import './Footer.css';
 
 const Footer = () => {
     return (
-        <>
-        <footer className = 'footer'>Contact us   |   Instagram</footer>
-        </>
-    )
+        <footer className='footer-content'>Contact us | Instagram</footer>
+    );
 }
 
-export default Footer
+export default Footer;

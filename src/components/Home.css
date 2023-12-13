@@ -1,0 +1,16 @@
+.home-container {
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+  background-color: #3c4fad;
+  border-radius: 10px;
+  margin: 2rem;
+}
+
+.home-container h1 {
+  margin-bottom: 1rem;
+}
+
+.home-container p {
+  font-size: 1.2rem;
+}
