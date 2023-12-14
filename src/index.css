@@ -12,7 +12,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
-  padding-top: 70px; /* Adjust as per the navbar's height */
+  padding-top: 70px; /* navbar's height */
 }
 
 a {
