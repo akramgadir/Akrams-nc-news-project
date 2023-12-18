@@ -3,7 +3,9 @@ import './Footer.css';
 
 const Footer = () => {
     return (
-        <footer className='footer-content'>Contact us | Instagram</footer>
+        <a href="https://www.akramscript.com/#contact" target="_blank" rel="noopener noreferrer">
+    <footer className='footer-content'>Click here to contact us! </footer>
+</a>
     );
 }
 
