@@ -1,7 +1,20 @@
+.header-container {
+  display: flex;
+  position: absolute;
+  top: 70px;
+  left: 400px;
+  width: auto;
+  margin: 0 8rem 0 8rem;
+}
+
 .header-title {
+  border-radius: 50%;
+
   text-align: center;
   padding: 1rem;
   background-color: #3c4fad;
   color: white;
   font-size: 2rem;
+  flex: 1;
+  justify-content: center;
 }
