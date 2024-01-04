@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: #060c2a;
   font-size: 16px;
   letter-spacing: 1px;
 }
@@ -11,6 +11,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  padding: 0.5rem;
 }
 
 a {

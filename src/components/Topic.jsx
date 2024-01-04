@@ -7,6 +7,10 @@ const Topic = () => {
     const [filteredArticles, setFilteredArticles] = useState([])
     const [isLoading, setIsLoading] = useState(true)
    
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
     useEffect(()=> {
         fetchArticleByTopic(topic)
         .then((filteredArticles)=> {
@@ -25,7 +29,7 @@ const Topic = () => {
 
     return (
         <>
-        <h2 key={topic} className = {topic}>Topic: {topic}</h2>
+        <h2 key={topic} className = 'topic-title'>Topic: {capitalizeFirstLetter(topic)}</h2>
         <div className="articles-container">
       {filteredArticles.map((article, index) => (
        <ArticleCard key={index} article={article}/>

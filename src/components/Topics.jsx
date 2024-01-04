@@ -29,12 +29,16 @@ const Topics = () => {
             <ul className="topics-list">
                 {topics.map((topic) => (
                     <li key={topic.slug}>
-                        <Link to={`/Topics/${topic.slug}`}>{topic.slug}</Link>
+                        <Link className='topic-link' to={`/Topics/${topic.slug}`}>{capitalizeFirstLetter(topic.slug)}</Link>
                     </li>
                 ))}
             </ul>
         </div>
     );
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export default Topics;
